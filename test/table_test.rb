@@ -509,7 +509,21 @@ describe "Table" do
     it "markdown option renders" do
       expected_table = <<-TABLE.chomp
 | a  |  b |
-|--- | ---|
+|--- | --: |
+| 1  |  2 |
+| 3  |  4 |
+
+2 rows in set
+TABLE
+      table([{:a=>1, :b=>2}, {:a=>3, :b=>4}], :markdown => true, :align_right => [ :b ]).
+        should == "\n#{expected_table}"
+    end
+
+
+    it "markdown option renders" do
+      expected_table = <<-TABLE.chomp
+| a  |  b |
+|--- | -- |
 | 1  |  2 |
 | 3  |  4 |
 
